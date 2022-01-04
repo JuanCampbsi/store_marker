@@ -7,5 +7,9 @@
       "**/*"
     ]
   },
-  "name": "store_marker"
+  "name": "store_marker",
+
+  "android": {
+    "permissions": ["ACCESS_BACKGROUND_LOCATION"]
+  }
 }
