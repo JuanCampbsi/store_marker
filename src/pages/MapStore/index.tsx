@@ -48,13 +48,13 @@ export default function MapStore() {
               coordinate={{ 
                 latitude: -27.2092052,
                 longitude: -49.6401092
-              }}
+              }}              
             >
               <Callout 
                 tooltip={true} 
                 onPress={handleNavigateToStoreDetails}
               >
-              <CalloutContainer >
+              <CalloutContainer>
                 <CalloutText>Loja pizzarias</CalloutText>              
               </CalloutContainer>            
           </Callout>

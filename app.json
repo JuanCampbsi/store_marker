@@ -9,6 +9,13 @@
   },
   "name": "store_marker",
 
+  "icon": "./assets/images/icon.png",
+  "splash": {
+    "image": "./assets/images/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#15C3D6"
+  },
+
   "android": {
     "permissions": ["ACCESS_BACKGROUND_LOCATION"]
   }

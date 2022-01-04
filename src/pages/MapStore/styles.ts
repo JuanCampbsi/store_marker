@@ -19,15 +19,19 @@ export const MapContainerView = styled(MapView)`
 
 export const CalloutContainer = styled.View`
     width: 160px;
-    height: 60px;
-    padding: 16px;
-    background-color: rgba(255, 255, 255, 0.8);
+    height: 50px;  
+   
+    background-color: red;
     border-radius: 16px;
+
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
 `;
 
 export const CalloutText = styled.Text`
-    color: #0089A5;
+    color: #FFF;
+
     font-size: 20px;
     font-family: Nunito_700Bold;
 `;
