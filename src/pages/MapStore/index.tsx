@@ -14,13 +14,31 @@ import {
   FooterText,
   MapContainerView
  } from './styles';
+import { useSelector } from 'react-redux';
 
 interface Props {
   navigation?: boolean;
   navigate: any;
 }
 
+interface DataProps {
+  id: string;
+  name: string;
+  description: string;
+  latitude: string;
+  longitude: string;
+}
+
 export default function MapStore() {
+  const latitude = useSelector<DataProps>(state => state.latitude);
+  
+
+  const data = {
+    latitude
+  }
+
+  console.log(data);
+
   const navigation : Props = useNavigation();
 
   function handleNavigateToCreateStore() {
