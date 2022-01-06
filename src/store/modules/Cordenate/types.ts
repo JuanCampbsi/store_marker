@@ -11,5 +11,5 @@ export interface ICordenateItem{
 }
 
 export interface ICordenateState{
-  items: ICordenate[];
+  items: ICordenateItem[];
 }

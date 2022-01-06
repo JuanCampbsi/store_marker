@@ -26,6 +26,7 @@ export default function SelectMapPosition() {
   }
   
   function handleNextStep() {
+    
     navigation.navigate('CreateStore', { position });
   }
 

@@ -37,7 +37,7 @@ export default function MapStore() {
     state
   }
 
-  console.log(data);
+  // console.log(data);
 
   const navigation : Props = useNavigation();
 
