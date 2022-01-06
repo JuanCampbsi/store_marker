@@ -19,15 +19,15 @@ interface Props {
 export default function SelectMapPosition() {
   const navigation: Props = useNavigation();
   const [position, setPosition] = useState({ latitude: 0, longitude: 0});
+ 
 
   function handleSelectMapPosition(event: MapEvent) {
     setPosition(event.nativeEvent.coordinate);
-    console.log(position)
   }
   
-  function handleNextStep() {
-    
-    navigation.navigate('CreateStore', { position });
+  function handleNextStep() {  
+    const { latitude, longitude} = position;
+    navigation.navigate('CreateStore', { latitude, longitude } );
   }
 
   return (

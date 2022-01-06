@@ -19,10 +19,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddCordenateToStore } from '../../store/modules/Cordenate/actions';
 import { ICordenate, ICordenateItem } from '../../store/modules/Cordenate/types';
 
+interface Props {
+  navigation?: boolean;
+  navigate?: any;
+}
 
 interface DescriptionProps {  
-  latitude: Number;
-  longitude: Number;
+  latitude: string;
+  longitude: string;
 }
 
 const schema = Yup.object().shape({
@@ -34,12 +38,15 @@ const schema = Yup.object().shape({
 
 export default function CreateStore() {
   const route = useRoute();
-  const navigation = useNavigation();
-
+  const navigation: Props = useNavigation();
   const dispatch = useDispatch();
 
-  const params = route.params as DescriptionProps;
- 
+  const params =  route.params as DescriptionProps;
+
+  const newParams ={
+    ...params
+  }
+
   const {
     control,
     handleSubmit,
@@ -52,14 +59,12 @@ export default function CreateStore() {
       id: String(uuid.v4()),
       name: store.name,
       description: store.description,
-      latitude: String(params.latitude),
-      longitude: String(params.longitude)
+      latitude: newParams.latitude,
+      longitude: newParams.longitude
     }
-    console.log(newTransaction)
-
+  
     dispatch(AddCordenateToStore(newTransaction))
-
-
+    navigation.navigate('MapStore')
   }, [dispatch])
 
   return (
@@ -78,7 +83,6 @@ export default function CreateStore() {
           name='description'
           control={control}
         />
-
 
         <ButtonNext onPress={handleSubmit(handleCreateStore)}>
           <ButtonTextNext>Register</ButtonTextNext>
