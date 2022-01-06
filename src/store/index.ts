@@ -1,13 +1,6 @@
 import { createStore } from 'redux';
+import rootReducer from './rootReducer';
 
-const store = createStore(() => {
-  return {
-    id: 1,
-    name: 'Loja Parme',
-    description: 'sjkajksa asjkajks asjkajsk',
-    latitude: `-27.2092052`,
-    longitude: `-49.6401092`,
-  }
-});
+const store = createStore(rootReducer)
 
 export default store;

@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
 export const Container = styled.View`
+    width: 100%;
+  
     padding: 24px;
     background-color: #f9fafc ;
    
@@ -21,15 +23,23 @@ export const Title = styled.Text`
 `;
 
 export const Icon= styled(Feather)`
+    width: 100%;
+    left: 5px;
+
     font-size: 24px;
     color: #15B6D6; 
 `;
 
 export const IconCancel= styled(Feather)`
+    width: 100%;
+    right: 20px;
+
     font-size: 24px;
     color: #FF669D; 
 `;
 
 
-export const ShowCancelView= styled.View``;
+export const ShowCancelView= styled.View`
+    width: 100%;
+`;
 

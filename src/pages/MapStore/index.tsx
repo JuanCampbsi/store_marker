@@ -30,11 +30,11 @@ interface DataProps {
 }
 
 export default function MapStore() {
-  const latitude = useSelector<DataProps>(state => state.latitude);
+  const state = useSelector<DataProps>(state => state);
   
 
   const data = {
-    latitude
+    state
   }
 
   console.log(data);

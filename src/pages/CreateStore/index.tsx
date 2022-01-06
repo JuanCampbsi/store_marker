@@ -1,49 +1,91 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import uuid from 'react-native-uuid';
 
 import { 
   ButtonNext, 
   ButtonTextNext, 
   Container, 
-  Input, 
   Title, 
-  TitleLabel 
+  TitleLabel,
+  LabelContainer 
 } from './styles';
 
+import { InputForm } from '../../components/Input';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { AddCordenateToStore } from '../../store/modules/Cordenate/actions';
+import { ICordenate } from '../../store/modules/Cordenate/types';
 
-interface StoresDataRouteParams {
-  position: { 
-    latitude: number, 
-    longitude: number
-  };
+interface DescriptionProps {
+  id: string;
+  name: string;
+  description: string;
+  latitude: number;
+  longitude: number;
 }
+
+const schema = Yup.object().shape({
+  name: Yup
+  .string(),
+  description: Yup
+  .string()
+})
 
 export default function CreateStore() {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const [open_on_weekends, setOpenOnWeekends] = useState(false);
+  const dispatch = useDispatch();
 
-  const params = route.params as StoresDataRouteParams;
-  const position = params.position;
 
-  function handleCreateStore() {
-    console.log(position)
-  } 
+  const params = route.params as DescriptionProps;
+ 
+  const { 
+    control, 
+    handleSubmit,      
+   } = useForm({
+    resolver: yupResolver(schema)
+  });
+
+  const handleCreateStore = useCallback((store: ICordenate) => {  
+    //   const newTransaction = {
+    //   id: String(uuid.v4()),
+    //   name: Cordenate.name,
+    //   description: Cordenate.description,
+    //   latitude: params.longitude,
+    //   longitude: params.longitude,
+    // }
+
+    dispatch(AddCordenateToStore(store))   
+    
+   // console.log(newTransaction)
+  }, [dispatch])
 
   return (
-    <Container contentContainerStyle={{ padding: 24 }}>
+    <Container>
       <Title>Description</Title>     
 
-      <TitleLabel>Name</TitleLabel>      
-        <Input />
+      <LabelContainer>
+        <TitleLabel>Name</TitleLabel>      
+          <InputForm
+            name='name'
+            control={control}
+          />        
+        
+        <TitleLabel>About</TitleLabel>
+          <InputForm
+            name='description'
+            control={control}
+          />    
       
-      <TitleLabel>About</TitleLabel>
-        <Input style={{ height: 110}}/>
-     
-      <ButtonNext onPress={handleCreateStore}>
-          <ButtonTextNext>Register</ButtonTextNext>     
-      </ButtonNext>          
+    
+        <ButtonNext onPress={handleSubmit(handleCreateStore)}>
+            <ButtonTextNext>Register</ButtonTextNext>     
+        </ButtonNext>  
+      </LabelContainer>           
     </Container>
   )
 }
