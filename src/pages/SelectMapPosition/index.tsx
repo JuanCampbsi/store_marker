@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { MapEvent, Marker } from 'react-native-maps';
 
 import mapMarkerImg from '../../images/map-marker.png';
@@ -19,8 +19,15 @@ interface Props {
 export default function SelectMapPosition() {
   const navigation: Props = useNavigation();
   const [position, setPosition] = useState({ latitude: 0, longitude: 0});
- 
+  const route = useRoute();
+  const [region, setRegion] = useState(null);
 
+  const params =  route.params;
+
+  const data:any = {
+    ...params
+  }
+  
   function handleSelectMapPosition(event: MapEvent) {
     setPosition(event.nativeEvent.coordinate);
   }
@@ -33,12 +40,7 @@ export default function SelectMapPosition() {
   return (
     <Container>  
       <MapContainerView
-         initialRegion={{
-            latitude: -27.2092052,
-            longitude: -49.6401092,
-            latitudeDelta: 0.008,
-            longitudeDelta: 0.008,
-        }}
+        initialRegion={data}
         onPress={handleSelectMapPosition}
       >
      

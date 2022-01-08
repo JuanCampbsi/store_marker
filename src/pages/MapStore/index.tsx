@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import mapMarkerImg from '../../images/map-marker.png';
 
@@ -16,6 +16,8 @@ import {
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 
 interface Props {
   navigation?: boolean;
@@ -26,14 +28,20 @@ interface DescriptionProps {
   id: string;
   name: string;
   description: string;
-  latitude:number,
-  longitude:number, 
+  latitude:number;
+  longitude:number;
+}
+interface RegionProps {   
+  latitude?:undefined;
+  longitude?:undefined;
+  latitudeDelta?: number;
+  longitudeDelta?: number;
 }
 
 export default function MapStore() {
   const navigation : Props = useNavigation(); 
   const [data, setData] = useState<DescriptionProps[]>([]);
-   
+  const [region, setRegion] = useState();
 
   async function loadTransactions() {
     const dataKey = `@store_marker:transactions`;
@@ -58,32 +66,56 @@ export default function MapStore() {
   }
 
   function handleNavigateToCreateStore() {
-    navigation.navigate('SelectMapPosition');
+    navigation.navigate('SelectMapPosition', region);
   }
 
   function handleNavigateToStoreDetails() {    
     navigation.navigate('StoreDetails'); 
   }
 
+ async function getLocation(){
+   try {
+    const{ status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      
+    }
+
+   } catch (error) {
+     
+   }
+   
+    let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.Highest});
+    const { latitude , longitude } = location.coords
+    setRegion({
+      latitude,
+      longitude,
+      latitudeDelta: 0.04,
+      longitudeDelta: 0.04,
+  })
+ }
+ 
+ useEffect(() => {
+  getLocation();
+}, []);
+
    useFocusEffect(
     useCallback(() => {
-      loadTransactions();      
+      loadTransactions();
+      getLocation();
     }, []),
   );
-
-  return (
+  if(!region) {
+    return null;
+  }
+  return (   
     <Container>    
         <MapContainerView
          showsUserLocation={true}	 
           provider={PROVIDER_GOOGLE}
-          initialRegion={{
-            latitude: -27.2092052,
-            longitude: -49.6401092,
-            latitudeDelta: 0.008,
-            longitudeDelta: 0.008,
-          }}        
+          initialRegion={region}         
         >
-          {data.map(item=>
+
+        {data.map(item=>
             <Marker 
               key={item.id}
               icon={mapMarkerImg}             
