@@ -108,7 +108,7 @@ export default function MapStore() {
 
 
       <Footer>
-        <FooterText>Cadastrar Lojas</FooterText>    
+        <FooterText>Register Stores</FooterText>    
           <CreateStoreButton onPress={handleNavigateToCreateStore}>
              <Feather name="plus" size={24} color="#FFF" />
           </CreateStoreButton>          
