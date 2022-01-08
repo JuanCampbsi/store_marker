@@ -19,37 +19,36 @@ export const MapContainerView = styled(MapView)`
 
 export const CalloutContainer = styled.View`
     width: 160px;
-    height: 50px;  
+    height: 40px;  
    
-    background-color: red;
-    border-radius: 16px;
-
+    background-color: #F5FFFA;
+    border-radius: 5px;
+    
     flex-direction: row;
     justify-content: center;
     align-items: center;
 `;
 
 export const CalloutText = styled.Text`
-    color: #FFF;
+    color: #708090;
 
-    font-size: 20px;
-    font-family: Nunito_700Bold;
+    font-size: ${RFValue(16)}px;
+    font-family: Nunito_600SemiBold;
+    font-style: italic;
 `;
 
-export const Footer = styled.View`  
-    width: 90%;    
+export const Footer = styled.View`          
     position: absolute;  
     
-    padding: 0 32px;
-    bottom: ${RFValue(20)}px;   
+    padding: 0 40px;
+    bottom: ${RFValue(40)}px;   
    
     background-color: #FFF;
     border-radius: 20px;
 
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
+    justify-content: space-between;
+    align-items: center;    
 `;
 
 export const FooterText = styled.Text`

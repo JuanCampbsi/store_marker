@@ -30,7 +30,7 @@ export const SelectLocationButton = styled(RectButton)`
 
 export const ButtonText = styled.Text`
     font-family: Nunito_800ExtraBold;
-    font-size: ${RFValue(16)}px;
+    font-size: ${RFValue(20)}px;
     color: #FFF;
 `;
 

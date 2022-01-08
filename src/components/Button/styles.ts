@@ -17,16 +17,16 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-    font-family: Nunito_600SemiBold;
+    font-family: Nunito_800ExtraBold;
     color: #8fa7b3;
-    font-size: 20px;
+    font-size: 24px;
 `;
 
 export const Icon= styled(Feather)`
     width: 100%;
     left: 5px;
 
-    font-size: 24px;
+    font-size: 40px;
     color: #15B6D6; 
 `;
 
@@ -34,7 +34,7 @@ export const IconCancel= styled(Feather)`
     width: 100%;
     right: 20px;
 
-    font-size: 24px;
+    font-size: 40px;
     color: #FF669D; 
 `;
 

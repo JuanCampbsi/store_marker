@@ -34,10 +34,10 @@ export default function SelectMapPosition() {
     <Container>  
       <MapContainerView
          initialRegion={{
-          latitude: -27.2092052,
-          longitude: -49.6401092,
-          latitudeDelta: 0.008,
-          longitudeDelta: 0.008,
+            latitude: -27.2092052,
+            longitude: -49.6401092,
+            latitudeDelta: 0.008,
+            longitudeDelta: 0.008,
         }}
         onPress={handleSelectMapPosition}
       >
@@ -53,7 +53,7 @@ export default function SelectMapPosition() {
 
       { !!position.latitude && (
         <SelectLocationButton onPress={handleNextStep}>
-          <ButtonText>Próximo</ButtonText>          
+          <ButtonText>Next</ButtonText>          
         </SelectLocationButton>        
       )}
     </Container>

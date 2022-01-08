@@ -1,32 +1,34 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 interface Props {
     onPress: any;
 }
 
 export const Container = styled.View`   
-    width: 95%;
+    width: 100%;
        
-    padding: 24px;
+    padding: ${RFValue(33)}px;
 `;
 
 export const Title = styled.Text`
     color: #5c8599;
-    font-size: 24px;
+    font-size: ${RFValue(24)}px;
     font-family: Nunito_700Bold;
 
     margin-bottom: 32px;
     padding-bottom: 24px;
     
-    border-bottom-width: 0.8px;
-    border-bottom-color: #D3E2E6;
+
 `;
 
 export const TitleLabel = styled.Text`
     color: #8fa7b3;
     font-family: Nunito_600SemiBold;
     margin-bottom: 8px;
+
+    font-size: ${RFValue(16)}px;
 `;
 
 export const ButtonNext = styled(RectButton)<Props>`
@@ -43,7 +45,7 @@ export const ButtonNext = styled(RectButton)<Props>`
 export const ButtonTextNext = styled.Text`
     color: #FFF;
     font-family: Nunito_800ExtraBold;
-    font-size: 16px;
+    font-size: ${RFValue(20)}px;
 `;
 
 export const LabelContainer = styled.View`

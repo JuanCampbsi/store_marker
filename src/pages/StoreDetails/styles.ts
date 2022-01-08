@@ -39,15 +39,6 @@ export const MapContainer = styled.View`
   margin-top: ${RFValue(24)}px; 
 `;
 
-export const Separator = styled.View`
-  background-color: #D3E2E6; 
-
-  height: 0.9px;
-  width: 100%;
-
-  padding: 0 24px;  
-  margin-top: ${RFValue(20)}px; 
-`;
 
 
 export const MapViewContainer = styled(MapView)`

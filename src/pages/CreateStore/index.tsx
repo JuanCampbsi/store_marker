@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import uuid from 'react-native-uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   ButtonNext,
@@ -15,16 +16,17 @@ import {
 
 import { InputForm } from '../../components/Input';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { AddCordenateToStore } from '../../store/modules/Cordenate/actions';
-import { ICordenate, ICordenateItem } from '../../store/modules/Cordenate/types';
+import { Alert } from 'react-native';
 
 interface Props {
   navigation?: boolean;
   navigate?: any;
 }
 
-interface DescriptionProps {  
+interface DescriptionProps {    
+  id: string;
+  name: string;
+  description: string;
   latitude: string;
   longitude: string;
 }
@@ -39,7 +41,6 @@ const schema = Yup.object().shape({
 export default function CreateStore() {
   const route = useRoute();
   const navigation: Props = useNavigation();
-  const dispatch = useDispatch();
 
   const params =  route.params as DescriptionProps;
 
@@ -54,20 +55,35 @@ export default function CreateStore() {
     resolver: yupResolver(schema)
   });
 
-  const handleCreateStore = useCallback((store: ICordenate) => {
-      const newTransaction: ICordenate = {
-      id: String(uuid.v4()),
-      name: store.name,
-      description: store.description,
-      latitude: newParams.latitude,
-      longitude: newParams.longitude
-    }
+ async function handlerCreateStore(form: DescriptionProps){
+  const newTransaction: DescriptionProps = {
+    id: String(uuid.v4()),
+    name: form.name,
+    description: form.description,
+    latitude: newParams.latitude,
+    longitude: newParams.longitude
+  }
   
-    dispatch(AddCordenateToStore(newTransaction))
-    navigation.navigate('MapStore')
-  }, [dispatch])
+  try {     
+    const dataKey = `@store_marker:transactions`;
+    const data = await AsyncStorage.getItem(dataKey);
+    const currentData = data ? JSON.parse(data) : [];
 
-  return (
+    const dataFormatted = [
+      ...currentData,
+      newTransaction
+    ]
+   
+    await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+    navigation.navigate('MapStore')
+  } catch (error) {
+    console.log(error);
+    Alert.alert('Não foi possível salvar');
+     }    
+   }
+ 
+ 
+ return (
     <Container>
       <Title>Description</Title>
 
@@ -82,9 +98,10 @@ export default function CreateStore() {
         <InputForm
           name='description'
           control={control}
-        />
+          style={{height: 200 }}
+        />  
 
-        <ButtonNext onPress={handleSubmit(handleCreateStore)}>
+        <ButtonNext onPress={handleSubmit(handlerCreateStore)}>
           <ButtonTextNext>Register</ButtonTextNext>
         </ButtonNext>
       </LabelContainer>

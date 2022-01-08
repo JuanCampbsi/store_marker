@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
-
 import mapMarkerImg from '../../images/map-marker.png';
 
 import { 
@@ -14,44 +13,68 @@ import {
   FooterText,
   MapContainerView
  } from './styles';
-import { useSelector } from 'react-redux';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 interface Props {
   navigation?: boolean;
   navigate: any;
 }
 
-interface DataProps {
+interface DescriptionProps {    
   id: string;
   name: string;
   description: string;
-  latitude: string;
-  longitude: string;
+  latitude:number,
+  longitude:number, 
 }
 
 export default function MapStore() {
-  const state = useSelector<DataProps>(state => state);
-  
+  const navigation : Props = useNavigation(); 
+  const [data, setData] = useState<DescriptionProps[]>([]);
+   
 
-  const data = {
-    state
+  async function loadTransactions() {
+    const dataKey = `@store_marker:transactions`;
+    const response = await AsyncStorage.getItem(dataKey);
+    const transactions = response ? JSON.parse(response) : [];
+    
+    const transactionsFormatted: DescriptionProps[] = transactions
+    .map((item: DescriptionProps) => {
+      const latitude = Number(item.latitude);
+      const longitude = Number(item.longitude);
+      
+      return {
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        latitude,
+        longitude
+      };
+     }
+    )
+    setData(transactionsFormatted)
   }
-
-  console.log(data);
-
-  const navigation : Props = useNavigation();
 
   function handleNavigateToCreateStore() {
     navigation.navigate('SelectMapPosition');
   }
 
-  function handleNavigateToStoreDetails() {
-    navigation.navigate('StoreDetails');
+  function handleNavigateToStoreDetails() {    
+    navigation.navigate('StoreDetails'); 
   }
+
+   useFocusEffect(
+    useCallback(() => {
+      loadTransactions();      
+    }, []),
+  );
 
   return (
     <Container>    
-        <MapContainerView 
+        <MapContainerView
+         showsUserLocation={true}	 
           provider={PROVIDER_GOOGLE}
           initialRegion={{
             latitude: -27.2092052,
@@ -60,23 +83,27 @@ export default function MapStore() {
             longitudeDelta: 0.008,
           }}        
         >
+          {data.map(item=>
             <Marker 
-              icon={mapMarkerImg}
-              calloutAnchor={{ x: 2.7, y: 0.8 }}
-              coordinate={{ 
-                latitude: -27.2092052,
-                longitude: -49.6401092
-              }}              
+              key={item.id}
+              icon={mapMarkerImg}             
+              coordinate={{
+                latitude: item.latitude,
+                longitude: item.longitude
+              }}
+              title={item.name}
+              description={item.description}            
             >
-              <Callout 
+              <Callout               
                 tooltip={true} 
-                onPress={handleNavigateToStoreDetails}
+                onPress={() => handleNavigateToStoreDetails()}
               >
               <CalloutContainer>
-                <CalloutText>Loja pizzarias</CalloutText>              
+                <CalloutText>{item.name}</CalloutText>              
               </CalloutContainer>            
           </Callout>
         </Marker>
+      )}
       </MapContainerView>
 
 

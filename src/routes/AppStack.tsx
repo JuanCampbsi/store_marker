@@ -47,7 +47,7 @@ export default function Routes() {
           component={StoreDetails}
           options={{ 
             headerShown: true,
-            header: (props) => <Button title="Stores" showCancel={false} {...props} />,
+            header: (props) => <Button title="Stores" {...props} />,
           }}
         />
       </Navigator>
