@@ -1,7 +1,7 @@
 <p align="center">
 <h1>
  Stores Marker 
- <img width="35" style="border-radius: 10px" height="35" src="../../Documents/store_marker/src/images/map-marker.png" alt="Intro"> 
+ <img width="35" style="border-radius: 10px" height="35" src="https://github.com/JuanCampbsi/store_marker/blob/7b1a702bd857c3ca24fd24d69de3b2e253fb4983/src/images/map-marker.png" alt="Intro"> 
 </h1>
 </p>
 
