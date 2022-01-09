@@ -9,10 +9,10 @@ export const Input = styled.TextInput`
     border-width: 1.4px;
     border-color: #d3e2e6;
     border-radius: 20px;
-    
-
+        
     padding: 18px;    
     margin-bottom: 16px;    
    
     font-size: 16px;
+    
 `;

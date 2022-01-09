@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+import React from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import uuid from 'react-native-uuid';
@@ -23,7 +23,7 @@ interface Props {
   navigate?: any;
 }
 
-interface DescriptionProps {    
+interface DescriptionProps {
   id: string;
   name: string;
   description: string;
@@ -42,9 +42,9 @@ export default function CreateStore() {
   const route = useRoute();
   const navigation: Props = useNavigation();
 
-  const params =  route.params as DescriptionProps;
+  const params = route.params as DescriptionProps;
 
-  const newParams ={
+  const newParams = {
     ...params
   }
 
@@ -55,35 +55,34 @@ export default function CreateStore() {
     resolver: yupResolver(schema)
   });
 
- async function handlerCreateStore(form: DescriptionProps){
-  const newTransaction: DescriptionProps = {
-    id: String(uuid.v4()),
-    name: form.name,
-    description: form.description,
-    latitude: newParams.latitude,
-    longitude: newParams.longitude
-  }
-  
-  try {     
-    const dataKey = `@store_marker:transactions`;
-    const data = await AsyncStorage.getItem(dataKey);
-    const currentData = data ? JSON.parse(data) : [];
+  async function handlerCreateStore(form: DescriptionProps) {
+    const newTransaction: DescriptionProps = {
+      id: String(uuid.v4()),
+      name: form.name,
+      description: form.description,
+      latitude: newParams.latitude,
+      longitude: newParams.longitude
+    }
 
-    const dataFormatted = [
-      ...currentData,
-      newTransaction
-    ]
-   
-    await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
-    navigation.navigate('MapStore')
-  } catch (error) {
-    console.log(error);
-    Alert.alert('Não foi possível salvar');
-     }    
-   }
- 
- 
- return (
+    try {
+      const dataKey = `@store_marker:transactions`;
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const dataFormatted = [
+        ...currentData,
+        newTransaction
+      ]
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+      navigation.navigate('MapStore')
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Unable to save');
+    }
+  }
+
+  return (
     <Container>
       <Title>Description</Title>
 
@@ -98,8 +97,10 @@ export default function CreateStore() {
         <InputForm
           name='description'
           control={control}
-          style={{height: 200 }}
-        />  
+          style={{ justifyContent: "flex-start" }}
+          multiline={true}
+          numberOfLines={4}
+        />
 
         <ButtonNext onPress={handleSubmit(handlerCreateStore)}>
           <ButtonTextNext>Register</ButtonTextNext>

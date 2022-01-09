@@ -1,9 +1,7 @@
 import React,{ 
   createContext, 
   ReactNode, 
-  useContext,
-  useEffect,
-  useState 
+  useContext
 } from "react";
 
 interface AuthProviderProps {
@@ -12,7 +10,6 @@ interface AuthProviderProps {
 
 
 interface AuthContextData {
-
 }
 
 

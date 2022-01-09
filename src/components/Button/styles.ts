@@ -22,7 +22,7 @@ export const Title = styled.Text`
     font-size: 24px;
 `;
 
-export const Icon= styled(Feather)`
+export const Icon = styled(Feather)`
     width: 100%;
     left: 5px;
 
@@ -30,7 +30,7 @@ export const Icon= styled(Feather)`
     color: #15B6D6; 
 `;
 
-export const IconCancel= styled(Feather)`
+export const IconCancel = styled(Feather)`
     width: 100%;
     right: 20px;
 
@@ -39,7 +39,7 @@ export const IconCancel= styled(Feather)`
 `;
 
 
-export const ShowCancelView= styled.View`
+export const ShowCancelView = styled.View`
     width: 100%;
 `;
 

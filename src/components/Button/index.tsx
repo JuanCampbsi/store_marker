@@ -2,13 +2,13 @@ import React from 'react';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { StackHeaderProps } from '@react-navigation/stack';
 
-import { 
+import {
   Container,
   ShowCancelView,
   Title,
   Icon,
   IconCancel
- } from './styles';
+} from './styles';
 
 
 interface HeaderProps extends StackHeaderProps {
@@ -16,33 +16,33 @@ interface HeaderProps extends StackHeaderProps {
   title: string;
 }
 
-export default function Button({ 
-  showCancel = true, 
-  title, 
+export default function Button({
+  showCancel = true,
+  title,
   navigation
 }: HeaderProps) {
 
   function handleCancelCreateOrphanage() {
     navigation.navigate('MapStore');
-  }  
+  }
 
   return (
     <Container>
       <BorderlessButton onPress={navigation.goBack}>
-        <Icon name={'arrow-left'}/>
+        <Icon name={'arrow-left'} />
       </BorderlessButton>
 
-      <Title>{title}</Title>      
+      <Title>{title}</Title>
 
-      { showCancel
+      {showCancel
         ? (
           <BorderlessButton onPress={handleCancelCreateOrphanage}>
-               <IconCancel name="x"/>
+            <IconCancel name="x" />
           </BorderlessButton>
         )
         : (
           <ShowCancelView />
-        ) }
+        )}
     </Container>
   );
 }

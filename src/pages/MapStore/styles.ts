@@ -3,7 +3,6 @@ import MapView from 'react-native-maps';
 import { RectButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-
 export const Container = styled.View`
     width: 100%;
     flex: 1;    
@@ -21,8 +20,8 @@ export const CalloutContainer = styled.View`
     width: 160px;
     height: 40px;  
    
-    background-color: #F5FFFA;
-    border-radius: 5px;
+    background-color:#FFFF00;
+    border-radius: 20px;
     
     flex-direction: row;
     justify-content: center;

@@ -4,11 +4,11 @@ import { MapEvent, Marker } from 'react-native-maps';
 
 import mapMarkerImg from '../../images/map-marker.png';
 
-import { 
+import {
   ButtonText,
-  Container, 
+  Container,
   MapContainerView,
-  SelectLocationButton 
+  SelectLocationButton
 } from './styles';
 
 interface Props {
@@ -18,45 +18,43 @@ interface Props {
 
 export default function SelectMapPosition() {
   const navigation: Props = useNavigation();
-  const [position, setPosition] = useState({ latitude: 0, longitude: 0});
+  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const route = useRoute();
-  const [region, setRegion] = useState(null);
 
-  const params =  route.params;
+  const params = route.params;
 
-  const data:any = {
+  const data: any = {
     ...params
   }
-  
+
   function handleSelectMapPosition(event: MapEvent) {
     setPosition(event.nativeEvent.coordinate);
   }
-  
-  function handleNextStep() {  
-    const { latitude, longitude} = position;
-    navigation.navigate('CreateStore', { latitude, longitude } );
+
+  function handleNextStep() {
+    const { latitude, longitude } = position;
+    navigation.navigate('CreateStore', { latitude, longitude });
   }
 
   return (
-    <Container>  
+    <Container>
       <MapContainerView
         initialRegion={data}
         onPress={handleSelectMapPosition}
       >
-     
-        { !!position.latitude && (
-          <Marker 
+
+        {!!position.latitude && (
+          <Marker
             icon={mapMarkerImg}
             coordinate={position}
           />
         )}
-      
-      </MapContainerView> 
+      </MapContainerView>
 
-      { !!position.latitude && (
+      {!!position.latitude && (
         <SelectLocationButton onPress={handleNextStep}>
-          <ButtonText>Next</ButtonText>          
-        </SelectLocationButton>        
+          <ButtonText>Next</ButtonText>
+        </SelectLocationButton>
       )}
     </Container>
   )
