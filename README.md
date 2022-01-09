@@ -17,7 +17,7 @@ O projeto tem como o objetivo  cadastrar lojas no mapa com alfinetes virtuais, s
 
 <p align="center">
   <kbd>
- <img width="400" style="border-radius: 10px" height="600" src="https://github.com/JuanCampbsi/store_marker/blob/89180daea89961ce2868fb8350ca012e4a64d7d9/src/images/apppreview.gif" alt="Intro"> 
+ <img width="400" style="border-radius: 10px" height="570" src="https://github.com/JuanCampbsi/store_marker/blob/89180daea89961ce2868fb8350ca012e4a64d7d9/src/images/apppreview.gif" alt="Intro"> 
   </kbd>
   </br>
 </p>
