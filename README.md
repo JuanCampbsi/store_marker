@@ -1,8 +1,11 @@
+<p align="center">
 <h1>
- Stores Marker
+ Stores Marker 
+ <img width="35" style="border-radius: 10px" height="35" src="../../Documents/store_marker/src/images/map-marker.png" alt="Intro"> 
 </h1>
+</p>
 
-### 🛠  Descrição  📲 Mobile
+### 🛠  Descrição  📲 Mobile  
 
 </br>
 
@@ -14,7 +17,7 @@ O projeto tem como o objetivo  cadastrar lojas no mapa com alfinetes virtuais, s
 
 <p align="center">
   <kbd>
- <img width="300" style="border-radius: 10px" height="450" src="https://media.giphy.com/media/vnZSRX9RwhUs3WbiJG/giphy.gif" alt="Intro"> 
+ <img width="320" style="border-radius: 10px" height="450" src="../../Documents/store_marker/src/images/apppreview.gif" alt="Intro"> 
   </kbd>
   </br>
 </p>
