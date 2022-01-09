@@ -14,12 +14,11 @@ O projeto tem como o objetivo  cadastrar lojas no mapa com alfinetes virtuais, s
 
 <p align="center">
   <kbd>
- <img width="300" style="border-radius: 5px" height="450" src="https://media.giphy.com/media/vnZSRX9RwhUs3WbiJG/giphy.gif" alt="Intro"> 
+ <img width="300" style="border-radius: 10px" height="450" src="https://media.giphy.com/media/vnZSRX9RwhUs3WbiJG/giphy.gif" alt="Intro"> 
   </kbd>
   </br>
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#rocket-tecnologias">Tecnologias</a>
 </p>
+
 </br>
 </br>
 
