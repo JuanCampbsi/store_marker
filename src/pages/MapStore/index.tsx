@@ -36,6 +36,7 @@ export default function MapStore() {
   const navigation: Props = useNavigation();
   const [data, setData] = useState<DescriptionProps[]>([]);
   const [region, setRegion] = useState<any>();
+  const [errorMsg, setErrorMsg] = useState<any>();
 
   async function loadTransactions() {
     const dataKey = `@store_marker:transactions`;
@@ -68,6 +69,11 @@ export default function MapStore() {
   }
 
   async function getLocation() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
+      return;
+    }
     let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
     const { latitude, longitude } = location.coords
     setRegion({
